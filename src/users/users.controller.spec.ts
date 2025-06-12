@@ -4,8 +4,6 @@ import { UsersService } from './users.service'
 import { AuthService } from './auth.service'
 import { User } from './user.entity'
 
-import { NotFoundException } from '@nestjs/common'
-
 describe('UsersController', () => {
   let controller: UsersController
   let fakeUsersService: Partial<UsersService>
@@ -54,5 +52,7 @@ describe('UsersController', () => {
 
   it('findAllUsers return a list of users with the given email', async () => {
     const users = await controller.findAllUsers('asdf@asdf.com')
+    expect(users.length).toEqual(1)
+    expect(users[0].email).toEqual('asdf@asdf.com')
   })
 })
